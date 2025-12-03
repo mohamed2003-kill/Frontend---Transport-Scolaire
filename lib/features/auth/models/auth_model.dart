@@ -1,0 +1,1 @@
+// Placeholder file - implement auth models here (User, LoginResponse, etc.)

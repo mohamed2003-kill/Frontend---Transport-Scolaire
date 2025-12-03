@@ -1,0 +1,1 @@
+// Placeholder file - implement main application configuration here

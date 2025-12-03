@@ -1,0 +1,1 @@
+// Placeholder file - implement error classes and handlers here

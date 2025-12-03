@@ -1,0 +1,1 @@
+// Placeholder file - implement app constants here
