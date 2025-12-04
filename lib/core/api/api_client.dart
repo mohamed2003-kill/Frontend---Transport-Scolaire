@@ -1,58 +1,49 @@
-// Placeholder file - implement API client and base HTTP configurations
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class AuthHttpClient {
+class ApiClient {
+  final Dio _dio;
   final _storage = const FlutterSecureStorage();
-  final _client = http.Client();
 
-  Future<String?> _loadToken() async {
-    return await _storage.read(key: 'auth_token');
-  }
+  ApiClient()
+    : _dio = Dio(
+        BaseOptions(
+          baseUrl: dotenv.env['BASE_URL']!,
+          headers: {'Content-Type': 'application/json'},
+        ),
+      ) {
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          // Attach JWT token if available
+          final token = await _storage.read(key: 'auth_token');
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
 
-  Future<http.Response> get(Uri url) async {
-    final token = await _loadToken();
-    return _client.get(
-      url,
-      headers: {
-        if (token != null) 'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
+          // Required for Flutter Web CORS when credentials are used
+          options.extra['withCredentials'] = true;
+
+          handler.next(options);
+        },
+      ),
     );
   }
 
-  Future<http.Response> post(Uri url, {Object? body}) async {
-    final token = await _loadToken();
-    return _client.post(
-      url,
-      body: body,
-      headers: {
-        if (token != null) 'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
+  Future<Response> get(String path, {Options? options}) async {
+    return _dio.get(path, options: options);
   }
 
-  Future<http.Response> put(Uri url, {Object? body}) async {
-    final token = await _loadToken();
-    return _client.put(
-      url,
-      body: body,
-      headers: {
-        if (token != null) 'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
+  Future<Response> post(String path, {Object? data, Options? options}) async {
+    return _dio.post(path, data: data, options: options);
   }
 
-  Future<http.Response> delete(Uri url) async {
-    final token = await _loadToken();
-    return _client.delete(
-      url,
-      headers: {
-        if (token != null) 'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
+  Future<Response> put(String path, {Object? data, Options? options}) async {
+    return _dio.put(path, data: data, options: options);
+  }
+
+  Future<Response> delete(String path, {Options? options}) async {
+    return _dio.delete(path, options: options);
   }
 }

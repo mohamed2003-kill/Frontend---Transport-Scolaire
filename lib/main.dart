@@ -1,15 +1,8 @@
-// Placeholder file - implement main function and runApp here
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:transport_scolaire/app.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(body: Center(child: Text('Start'))),
-    );
-  }
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(const App());
 }

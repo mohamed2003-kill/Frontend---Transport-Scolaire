@@ -1,1 +1,0 @@
-// Placeholder file - implement auth screens here (Login, Register, etc.)
