@@ -191,3 +191,56 @@ Provide reusable UI components that can be used throughout the application.
 - Consider performance when designing complex widgets
 - Follow Flutter widget composition best practices
 
+
+
+{
+"service": "Location Service",
+"status": "running",
+"endpoints": [
+{
+"path": "/locations/{entity_type}/{entity_id}",
+"methods": [
+"POST"
+],
+"name": "create_location",
+"summary": "Create a location",
+"description": "Add a GPS location for a student or a bus..."
+},
+{
+"path": "/locations/entity/{entity_type}/{entity_id}",
+"methods": [
+"GET"
+],
+"name": "get_locations_by_entity",
+"summary": "Get locations by entity",
+"description": "Retrieve all locations for a specific entity (student or bus) with optional pagination using skip and limit."
+},
+{
+"path": "/entities/locations",
+"methods": [
+"GET"
+],
+"name": "get_all_entities_latest_locations",
+"summary": "Get latest locations of all entities",
+"description": "Retrieve the latest GPS locations for all entities, optionally filtered by entity type."
+},
+{
+"path": "/locations/",
+"methods": [
+"GET"
+],
+"name": "get_locations",
+"summary": "Get locations",
+"description": "Retrieve a list of locations. You can optionally filter by entity ID or entity type and paginate with skip/limit."
+},
+{
+"path": "/",
+"methods": [
+"GET"
+],
+"name": "read_root",
+"summary": "Root endpoint",
+"description": "All endpoints and their descriptions"
+}
+]
+}
