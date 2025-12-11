@@ -7,10 +7,16 @@ This Flutter application provides a user interface for the school transport syst
 ```
 features/
 ├── planning/
-│   └── main.dart
-├── pubspec.yaml
-├── README.md
-└── ... (other Flutter project files)
+    |── main.dart
+    ├── data
+        └── api_sevice.dart
+    ├── presentation
+        └── home_screen.dart
+    └── models
+        ├── route.dart
+        ├── bus.dart
+        └── student.dart
+    └── README.md
 ```
 
 ## 2. Features
