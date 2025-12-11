@@ -5,8 +5,8 @@ This Flutter application provides a user interface for the school transport syst
 ## 1. Project Structure
 
 ```
-opttrajflutter/
-├── lib/
+features/
+├── planning/
 │   └── main.dart
 ├── pubspec.yaml
 ├── README.md
@@ -84,6 +84,3 @@ Mock data for testing (e.g., sample student locations and bus routes) can be imp
 
 The application is designed with an intuitive and fluid interface, supporting both Android and iOS platforms.
 
-## 8. Author
-
-Manus AI
